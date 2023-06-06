@@ -1,0 +1,174 @@
+﻿@page
+@model Restaurant_Management.Pages.Services.Orders.IndexModel
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Token)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].SubTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].ItemDiscount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Tax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Shipping)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Promo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].GrandTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Line1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Line2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Province)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Vendor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Order) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Token)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shipping)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Promo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrandTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Line1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Line2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

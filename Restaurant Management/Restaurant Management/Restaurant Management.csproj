@@ -25,8 +25,6 @@
   <ItemGroup>
     <Folder Include="Pages\Services\Transactions\" />
     <Folder Include="Pages\Services\Recipes\" />
-    <Folder Include="Pages\Services\OrderItems\" />
-    <Folder Include="Pages\Services\Orders\" />
   </ItemGroup>
 
 </Project>

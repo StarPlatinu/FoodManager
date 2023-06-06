@@ -1,0 +1,84 @@
+﻿@page
+@model Restaurant_Management.Pages.Services.OrderItems.IndexModel
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Sku)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Item)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderItem[0].Order)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderItem) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sku)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

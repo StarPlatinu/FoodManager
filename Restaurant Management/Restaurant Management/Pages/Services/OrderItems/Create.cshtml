@@ -1,0 +1,51 @@
+﻿@page
+@model Restaurant_Management.Pages.Services.OrderItems.CreateModel
+
+<h4>OrderItem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderItem.OrderId" class="control-label"></label>
+                <select asp-for="OrderItem.OrderId" class ="form-control" asp-items="ViewBag.OrderId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.ItemId" class="control-label"></label>
+                <select asp-for="OrderItem.ItemId" class ="form-control" asp-items="ViewBag.ItemId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.Sku" class="control-label"></label>
+                <input asp-for="OrderItem.Sku" class="form-control" />
+                <span asp-validation-for="OrderItem.Sku" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.CreatedAt" class="control-label"></label>
+                <input asp-for="OrderItem.CreatedAt" class="form-control" />
+                <span asp-validation-for="OrderItem.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.UpdatedAt" class="control-label"></label>
+                <input asp-for="OrderItem.UpdatedAt" class="form-control" />
+                <span asp-validation-for="OrderItem.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderItem.Content" class="control-label"></label>
+                <input asp-for="OrderItem.Content" class="form-control" />
+                <span asp-validation-for="OrderItem.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
