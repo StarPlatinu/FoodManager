@@ -23,8 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Services\Menus\" />
-    <Folder Include="Pages\Services\MenuItem\" />
     <Folder Include="Pages\Services\Transactions\" />
     <Folder Include="Pages\Services\Recipes\" />
     <Folder Include="Pages\Services\OrderItems\" />

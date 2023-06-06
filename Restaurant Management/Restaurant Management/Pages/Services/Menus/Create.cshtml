@@ -1,0 +1,57 @@
+﻿@page
+@model Restaurant_Management.Pages.Services.Menus.CreateModel
+
+<h4>Menu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Menu.UserId" class="control-label"></label>
+                <select asp-for="Menu.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.Title" class="control-label"></label>
+                <input asp-for="Menu.Title" class="form-control" />
+                <span asp-validation-for="Menu.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.Slug" class="control-label"></label>
+                <input asp-for="Menu.Slug" class="form-control" />
+                <span asp-validation-for="Menu.Slug" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.Summary" class="control-label"></label>
+                <input asp-for="Menu.Summary" class="form-control" />
+                <span asp-validation-for="Menu.Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.CreatedAt" class="control-label"></label>
+                <input asp-for="Menu.CreatedAt" class="form-control" />
+                <span asp-validation-for="Menu.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.UpdatedAt" class="control-label"></label>
+                <input asp-for="Menu.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Menu.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.Content" class="control-label"></label>
+                <input asp-for="Menu.Content" class="form-control" />
+                <span asp-validation-for="Menu.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
