@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Services\TableTops\" />
     <Folder Include="Pages\Services\Transactions\" />
-    <Folder Include="Pages\Services\Recipes\" />
   </ItemGroup>
 
 </Project>
