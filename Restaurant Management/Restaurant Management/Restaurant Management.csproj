@@ -24,8 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Services\Menus\" />
-    <Folder Include="Pages\Services\Items\" />
-    <Folder Include="Pages\Services\ItemChef\" />
     <Folder Include="Pages\Services\MenuItem\" />
     <Folder Include="Pages\Services\Transactions\" />
     <Folder Include="Pages\Services\Recipes\" />

@@ -1,0 +1,76 @@
+﻿@page
+@model Restaurant_Management.Pages.Services.Items.CreateModel
+
+<h4>Item</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Item.UserId" class="control-label"></label>
+                <select asp-for="Item.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.VendorId" class="control-label"></label>
+                <select asp-for="Item.VendorId" class ="form-control" asp-items="ViewBag.VendorId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.Title" class="control-label"></label>
+                <input asp-for="Item.Title" class="form-control" />
+                <span asp-validation-for="Item.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.Slug" class="control-label"></label>
+                <input asp-for="Item.Slug" class="form-control" />
+                <span asp-validation-for="Item.Slug" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.Summary" class="control-label"></label>
+                <input asp-for="Item.Summary" class="form-control" />
+                <span asp-validation-for="Item.Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.Sku" class="control-label"></label>
+                <input asp-for="Item.Sku" class="form-control" />
+                <span asp-validation-for="Item.Sku" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.Recipe" class="control-label"></label>
+                <input asp-for="Item.Recipe" class="form-control" />
+                <span asp-validation-for="Item.Recipe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.Instructions" class="control-label"></label>
+                <input asp-for="Item.Instructions" class="form-control" />
+                <span asp-validation-for="Item.Instructions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.CreatedAt" class="control-label"></label>
+                <input asp-for="Item.CreatedAt" class="form-control" />
+                <span asp-validation-for="Item.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.UpdatedAt" class="control-label"></label>
+                <input asp-for="Item.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Item.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item.Content" class="control-label"></label>
+                <input asp-for="Item.Content" class="form-control" />
+                <span asp-validation-for="Item.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
