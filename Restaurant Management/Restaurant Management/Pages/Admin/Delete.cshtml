@@ -1,0 +1,104 @@
+﻿@page
+@model Restaurant_Management.Pages.Admin.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.MiddleName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.MiddleName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Mobile)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Mobile)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.PasswordHash)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.PasswordHash)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Admin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Admin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Vendor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Vendor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Chef)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Chef)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Agent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Agent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.RegisteredAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.RegisteredAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.LastLogin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.LastLogin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Intro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Intro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Profile)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Profile)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="User.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

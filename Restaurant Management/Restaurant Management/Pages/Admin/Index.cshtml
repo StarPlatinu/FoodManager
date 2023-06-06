@@ -1,0 +1,113 @@
+﻿@page
+@model Restaurant_Management.Pages.Admin.IndexModel
+
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].PasswordHash)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Admin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Vendor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Chef)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Agent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].RegisteredAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].LastLogin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Intro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Profile)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.User) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PasswordHash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Admin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chef)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisteredAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profile)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
