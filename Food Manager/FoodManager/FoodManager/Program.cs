@@ -9,6 +9,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<FoodManagerDBContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DBConnection")
     ));
+//Config urls to lower case
+builder.Services.Configure<RouteOptions>(routeOptions => {
+    routeOptions.LowercaseUrls = true;
+});
+
 
 var app = builder.Build();
 
