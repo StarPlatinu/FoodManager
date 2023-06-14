@@ -55,7 +55,7 @@ namespace FoodManager.Pages.Categories
                 _context.Categories.Remove(Category);
                 await _context.SaveChangesAsync();
             }
-
+            TempData["success"] = "Category delete successfully";
             return RedirectToPage("./Index");
         }
     }

@@ -32,11 +32,13 @@ namespace FoodManager.Pages.Categories
         {
           if (!ModelState.IsValid || _context.Categories == null || Category == null)
             {
+                TempData["error"] = "Category created false";
                 return Page();
             }
 
             _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
+            TempData["success"] = "Category created successfully";
 
             return RedirectToPage("./Index");
         }

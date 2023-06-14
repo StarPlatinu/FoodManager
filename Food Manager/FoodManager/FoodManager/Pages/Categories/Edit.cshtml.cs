@@ -64,7 +64,7 @@ namespace FoodManager.Pages.Categories
                     throw;
                 }
             }
-
+            TempData["success"] = "Category edited successfully";
             return RedirectToPage("./Index");
         }
 
