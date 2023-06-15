@@ -10,5 +10,6 @@ namespace FoodManager.Model
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<FoodType> FoodType { get; set; }
     }
 }

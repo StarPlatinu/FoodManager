@@ -40,6 +40,23 @@ namespace FoodManager.Migrations
 
                     b.ToTable("Categories");
                 });
+
+            modelBuilder.Entity("FoodManager.Model.FoodType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FoodType");
+                });
 #pragma warning restore 612, 618
         }
     }

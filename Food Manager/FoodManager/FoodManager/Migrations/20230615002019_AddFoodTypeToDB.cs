@@ -5,7 +5,7 @@
 namespace FoodManager.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCategoryToDB : Migration
+    public partial class AddFoodTypeToDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +23,19 @@ namespace FoodManager.Migrations
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "FoodType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FoodType", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -30,6 +43,9 @@ namespace FoodManager.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "FoodType");
         }
     }
 }
