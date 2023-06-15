@@ -9,7 +9,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead class="table-light">
@@ -33,9 +33,9 @@
                 @Html.DisplayFor(modelItem => item.DisplayOrder)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
