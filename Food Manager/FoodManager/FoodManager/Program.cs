@@ -1,4 +1,6 @@
 using FoodManager.Model;
+using FoodManager.Repository;
+using FoodManager.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<FoodManagerDBContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DBConnection")
     ));
+//Dk repository cho container
+builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 //Config urls to lower case
 builder.Services.Configure<RouteOptions>(routeOptions => {
     routeOptions.LowercaseUrls = true;

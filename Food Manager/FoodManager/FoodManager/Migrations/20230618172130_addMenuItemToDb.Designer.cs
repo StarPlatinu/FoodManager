@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodManager.Migrations
 {
     [DbContext(typeof(FoodManagerDBContext))]
-    [Migration("20230615002019_AddFoodTypeToDB")]
-    partial class AddFoodTypeToDB
+    [Migration("20230618172130_addMenuItemToDb")]
+    partial class addMenuItemToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,63 @@ namespace FoodManager.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FoodType");
+                });
+
+            modelBuilder.Entity("FoodManager.Model.MenuItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FoodTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("FoodTypeId");
+
+                    b.ToTable("MenuItem");
+                });
+
+            modelBuilder.Entity("FoodManager.Model.MenuItem", b =>
+                {
+                    b.HasOne("FoodManager.Model.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodManager.Model.FoodType", "FoodType")
+                        .WithMany()
+                        .HasForeignKey("FoodTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("FoodType");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,5 +11,6 @@ namespace FoodManager.Model
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<FoodType> FoodType { get; set; }
+        public DbSet<MenuItem> MenuItem { get; set; }   
     }
 }
