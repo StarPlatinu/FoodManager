@@ -30,6 +30,8 @@ namespace FoodManager.Pages.Categories
             }
 
             var category =  await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            // var category =  await _context.Categories.SingleOrDefault(u=>u.Id==id)
+            //var category = await _context.Categories.Where(u=>u.id==id).FirstIrDefault()
             if (category == null)
             {
                 return NotFound();
