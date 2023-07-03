@@ -1,31 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FoodManager.Model;
+using FoodManager.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using FoodManager.Model;
 
-namespace FoodManager.Pages.Categories
+namespace FoodManager.Pages.Admin.Categories
 {
-    public class IndexModel : PageModel
+	[BindProperties]
+	public class IndexModel : PageModel
     {
-        private readonly FoodManager.Model.FoodManagerDBContext _context;
-
-        public IndexModel(FoodManager.Model.FoodManagerDBContext context)
+		private readonly IUnitOfWork _unitOfWork;
+		public IEnumerable<Category> Categories { get; set; }
+		public IndexModel(IUnitOfWork unitOfWork)
+		{
+			_unitOfWork = unitOfWork;
+		}
+		public void OnGet()
         {
-            _context = context;
-        }
-
-        public IList<Category> Category { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            if (_context.Categories != null)
-            {
-                Category = await _context.Categories.ToListAsync();
-            }
+			Categories = _unitOfWork.Category.GetAll();
         }
     }
 }

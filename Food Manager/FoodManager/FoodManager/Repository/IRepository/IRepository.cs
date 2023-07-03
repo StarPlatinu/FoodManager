@@ -4,7 +4,8 @@ namespace FoodManager.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-       void Add(T entity);
+        //GET ALL, GET By ID FIRST OR DEFAULT, ADD, REMOVE, REMOVERANGE
+        void Add(T entity);
        void Remove(T entity);
        void RemoveRange(IEnumerable<T> entities);
 

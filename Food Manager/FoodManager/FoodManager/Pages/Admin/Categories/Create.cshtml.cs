@@ -1,46 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FoodManager.Model;
+using FoodManager.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using FoodManager.Model;
 
-namespace FoodManager.Pages.Categories
+namespace FoodManager.Pages.Admin.Categories
 {
-    public class CreateModel : PageModel
+	[BindProperties]
+	public class CreateModel : PageModel
     {
-        private readonly FoodManager.Model.FoodManagerDBContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+        public Category Category { get; set; }
 
-        public CreateModel(FoodManager.Model.FoodManagerDBContext context)
+        public CreateModel(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
-        public IActionResult OnGet()
+        public void OnGet()
         {
-            return Page();
         }
 
-        [BindProperty]
-        public Category Category { get; set; } = default!;
-        
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPost()
         {
-          if (!ModelState.IsValid || _context.Categories == null || Category == null)
+         if(Category.Name == Category.DisplayOrder.ToString())
             {
-                TempData["error"] = "Category created false";
-                return Page();
+                ModelState.AddModelError("Category.Name", "The DisplayOrder cannot exactly math the Name.");
             }
-
-            _context.Categories.Add(Category);
-            await _context.SaveChangesAsync();
-            TempData["success"] = "Category created successfully";
-
-            return RedirectToPage("./Index");
+         if(ModelState.IsValid)
+            {
+                _unitOfWork.Category.Add(Category);
+                _unitOfWork.Save();
+                TempData["success"] = "Category created successfully";
+                return RedirectToPage("Index");
+            }
+         return Page();
         }
     }
 }

@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Customer\**" />
+    <Content Remove="Pages\Customer\**" />
+    <EmbeddedResource Remove="Pages\Customer\**" />
+    <None Remove="Pages\Customer\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.design" Version="7.0.7">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -21,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Customer\" />
+    <Folder Include="Pages\Admin\Order\" />
   </ItemGroup>
 
 </Project>

@@ -1,78 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FoodManager.Model;
+using FoodManager.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using FoodManager.Model;
 
-namespace FoodManager.Pages.Categories
+namespace FoodManager.Pages.Admin.Categories
 {
-    public class EditModel : PageModel
+	[BindProperties]
+	public class EditModel : PageModel
     {
-        private readonly FoodManager.Model.FoodManagerDBContext _context;
+		private readonly IUnitOfWork _unitOfWork;
 
-        public EditModel(FoodManager.Model.FoodManagerDBContext context)
-        {
-            _context = context;
-        }
+		public Category Category { get; set; }
 
-        [BindProperty]
-        public Category Category { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null || _context.Categories == null)
-            {
-                return NotFound();
-            }
+		public EditModel(IUnitOfWork unitOfWork)
+		{
+			_unitOfWork = unitOfWork;
+		}
 
-            var category =  await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
-            // var category =  await _context.Categories.SingleOrDefault(u=>u.Id==id)
-            //var category = await _context.Categories.Where(u=>u.id==id).FirstIrDefault()
-            if (category == null)
-            {
-                return NotFound();
-            }
-            Category = category;
-            return Page();
-        }
+		public void OnGet(int id)
+		{
+			Category = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+			//Category = _db.Category.FirstOrDefault(u=>u.Id==id);
+			//Category = _db.Category.SingleOrDefault(u=>u.Id==id);
+			//Category = _db.Category.Where(u => u.Id == id).FirstOrDefault();
+		}
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Category).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(Category.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            TempData["success"] = "Category edited successfully";
-            return RedirectToPage("./Index");
-        }
-
-        private bool CategoryExists(int id)
-        {
-          return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-    }
+		public async Task<IActionResult> OnPost()
+		{
+			if (Category.Name == Category.DisplayOrder.ToString())
+			{
+				ModelState.AddModelError("Category.Name", "The DisplayOrder cannot exactly match the Name.");
+			}
+			if (ModelState.IsValid)
+			{
+				_unitOfWork.Category.Update(Category);
+				_unitOfWork.Save();
+				TempData["success"] = "Category updated successfully";
+				return RedirectToPage("Index");
+			}
+			return Page();
+		}
+	}
 }

@@ -1,62 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FoodManager.Model;
+using FoodManager.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using FoodManager.Model;
 
-namespace FoodManager.Pages.Categories
+namespace FoodManager.Pages.Admin.Categories
 {
-    public class DeleteModel : PageModel
+	[BindProperties]
+	public class DeleteModel : PageModel
     {
-        private readonly FoodManager.Model.FoodManagerDBContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+        public Category Category { get; set; }
 
-        public DeleteModel(FoodManager.Model.FoodManagerDBContext context)
+
+        public DeleteModel(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
+        }
+        public void OnGet(int id)
+        {
+            Category = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            //Category = _db.Category.FirstOrDefault(u=>u.Id==id);
+            //Category = _db.Category.SingleOrDefault(u=>u.Id==id);
+            //Category = _db.Category.Where(u => u.Id == id).FirstOrDefault();
         }
 
-        [BindProperty]
-      public Category Category { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnPost()
         {
-            if (id == null || _context.Categories == null)
+            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == Category.Id);
+            if (categoryFromDb != null)
             {
-                return NotFound();
+                _unitOfWork.Category.Remove(categoryFromDb);
+                _unitOfWork.Save();
+                TempData["success"] = "Category deleted successfully";
+                return RedirectToPage("Index");
+
             }
 
-            var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (category == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                Category = category;
-            }
             return Page();
         }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null || _context.Categories == null)
-            {
-                return NotFound();
-            }
-            var category = await _context.Categories.FindAsync(id);
-
-            if (category != null)
-            {
-                Category = category;
-                _context.Categories.Remove(Category);
-                await _context.SaveChangesAsync();
-            }
-            TempData["success"] = "Category delete successfully";
-            return RedirectToPage("./Index");
-        }
+     
     }
 }

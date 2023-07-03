@@ -12,7 +12,8 @@ builder.Services.AddDbContext<FoodManagerDBContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DBConnection")
     ));
 //Dk repository cho container
-builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 //Config urls to lower case
 builder.Services.Configure<RouteOptions>(routeOptions => {
     routeOptions.LowercaseUrls = true;

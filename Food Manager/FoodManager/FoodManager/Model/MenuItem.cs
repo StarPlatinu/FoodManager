@@ -16,6 +16,7 @@ namespace FoodManager.Model
         public int FoodTypeId { get; set; }
         [ForeignKey("FoodTypeId")]
         public FoodType FoodType { get; set;}
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }      
         public Category Category { get; set; }  
 
