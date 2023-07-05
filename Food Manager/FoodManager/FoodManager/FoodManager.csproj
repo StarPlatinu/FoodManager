@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Admin\Order\" />
+    <Folder Include="wwwroot\images\menuitems\" />
   </ItemGroup>
 
 </Project>
