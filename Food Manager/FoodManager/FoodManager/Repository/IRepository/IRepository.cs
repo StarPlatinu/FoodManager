@@ -9,10 +9,11 @@ namespace FoodManager.Repository.IRepository
        void Remove(T entity);
        void RemoveRange(IEnumerable<T> entities);
 
-       IEnumerable<T> GetAll();
+		IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null,
+			  Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null,
+			  string? includeProperties = null);
+		T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
 
-       T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null);
 
-
-    }
+	}
 }
