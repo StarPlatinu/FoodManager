@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FoodManager.Model
 {
-    public class FoodManagerDBContext : DbContext
+    public class FoodManagerDBContext : IdentityDbContext
     {
         public FoodManagerDBContext(DbContextOptions<FoodManagerDBContext> options) : base(options) 
         {
