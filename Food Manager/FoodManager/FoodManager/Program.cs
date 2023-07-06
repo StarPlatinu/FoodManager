@@ -2,6 +2,7 @@ using FoodManager.Model;
 using FoodManager.Repository;
 using FoodManager.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<FoodManagerDBContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DBConnection")
     ));
+
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<FoodManagerDBContext>();
 //Dk repository cho container
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -34,6 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
