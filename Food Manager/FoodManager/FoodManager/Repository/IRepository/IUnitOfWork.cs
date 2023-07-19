@@ -5,6 +5,7 @@
         ICategoryRepository Category { get; }
         IFoodTypeRepository FoodType { get; }
         IMenuItemRepository MenuItem { get; }
+        public IShoppingCartRepository ShoppingCart { get;}
         void Save();
     }
 }

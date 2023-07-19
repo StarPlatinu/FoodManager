@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Admin\Order\" />
-    <Folder Include="Pages\Customer\Cart\" />
     <Folder Include="wwwroot\images\menuitems\" />
   </ItemGroup>
 
