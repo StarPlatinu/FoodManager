@@ -1,5 +1,6 @@
 using FoodManager.Model;
 using FoodManager.Repository.IRepository;
+using FoodManager.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
@@ -31,5 +32,43 @@ namespace FoodManager.Pages.Customer.Cart
 				}
 			}
 		}
+
+		public IActionResult OnPostPlus(int cartId)
+		{
+			var cart = _unitOfWork.ShoppingCart.GetFirstOrDefault(u => u.Id == cartId);
+			_unitOfWork.ShoppingCart.IncrementCount(cart, 1);
+			return RedirectToPage("/Customer/Cart/Index");
+		}
+		public IActionResult OnPostMinus(int cartId)
+		{
+			var cart = _unitOfWork.ShoppingCart.GetFirstOrDefault(u => u.Id == cartId);
+			if (cart.Count == 1)
+			{
+				var count = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cart.ApplicationUserId).ToList().Count - 1;
+
+				_unitOfWork.ShoppingCart.Remove(cart);
+				_unitOfWork.Save();
+				HttpContext.Session.SetInt32(SD.SessionCart, count);
+			}
+			else
+			{
+				_unitOfWork.ShoppingCart.DecrementCount(cart, 1);
+			}
+			return RedirectToPage("/Customer/Cart/Index");
+		}
+		public IActionResult OnPostRemove(int cartId)
+		{
+			var cart = _unitOfWork.ShoppingCart.GetFirstOrDefault(u => u.Id == cartId);
+
+
+			var count = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cart.ApplicationUserId).ToList().Count - 1;
+
+			_unitOfWork.ShoppingCart.Remove(cart);
+			_unitOfWork.Save();
+			//HttpContext.Session.SetInt32(SD.SessionCart, count);
+			return RedirectToPage("/Customer/Cart/Index");
+		}
+
 	}
 }
+
