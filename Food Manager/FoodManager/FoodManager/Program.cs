@@ -3,6 +3,8 @@ using FoodManager.Repository;
 using FoodManager.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using FoodManager.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +15,9 @@ builder.Services.AddDbContext<FoodManagerDBContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DBConnection")
     ));
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddEntityFrameworkStores<FoodManagerDBContext>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>()
+    .AddEntityFrameworkStores<FoodManagerDBContext>().AddDefaultTokenProviders();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 //Dk repository cho container
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
