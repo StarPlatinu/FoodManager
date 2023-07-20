@@ -19,26 +19,43 @@ namespace FoodManager.Pages.Customer.Home
 		public IEnumerable<MenuItem> MenuItemList { get; set; }
 		public IEnumerable<Category> CategoryList { get; set; }
 
-		public void OnGet()
+		public void OnGet(string searchQuery)
 		{
-			MenuItemList = _unitOfWork.MenuItem.GetAll(includeProperties: "Category,FoodType");
-			CategoryList = _unitOfWork.Category.GetAll(orderby: u => u.OrderBy(c => c.DisplayOrder));
-		}
-
-		public IActionResult OnPost(string search)
-		{
-
-            MenuItemList = _unitOfWork.MenuItem.GetAll(includeProperties: "Category,FoodType");
-            CategoryList = _unitOfWork.Category.GetAll(orderby: u => u.OrderBy(c => c.DisplayOrder));
-
-            if (!string.IsNullOrEmpty(SearchQuery))
+            if (!string.IsNullOrEmpty(searchQuery))
             {
-                return Page();
+                SearchQuery = searchQuery;
+                MenuItemList = _unitOfWork.MenuItem.GetAll(includeProperties: "Category,FoodType").Where(p => p.Name.Contains(SearchQuery));
+                CategoryList = _unitOfWork.Category.GetAll(orderby: u => u.OrderBy(c => c.DisplayOrder));
+
+                List<Category> cat = CategoryList.ToList();
+
+                for(int i = 0; i < cat.Count; i++)
+                {
+                    bool check = false;
+                    foreach (var item in MenuItemList)
+                    {
+                        if (cat[i].Id == item.CategoryId)
+                        {
+                            check = false;
+                            break;
+                        }
+                        else
+                        {
+                            check = true;
+                        }
+                    }
+                    if (check)
+                    {
+                        cat.Remove(cat[i]);
+                    }
+                }
+                CategoryList = cat;
             }
             else
             {
-                return RedirectToPage("Error");
+                MenuItemList = _unitOfWork.MenuItem.GetAll(includeProperties: "Category,FoodType");
+                CategoryList = _unitOfWork.Category.GetAll(orderby: u => u.OrderBy(c => c.DisplayOrder));
             }
-        }
+		}
 	}
 }
