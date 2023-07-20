@@ -1,6 +1,6 @@
 ﻿@page
 @model FoodManager.Pages.Customer.Home.DetailsModel
-@{
+
     <div class="">
         <form method="post">
             <input asp-for="ShoppingCart.MenuItemId" hidden />
@@ -55,4 +55,7 @@
             </div>
         </form>
     </div>
-}
+
+    @section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }

@@ -1,14 +1,16 @@
 using FoodManager.Model;
 using FoodManager.Repository.IRepository;
 using FoodManager.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
 namespace FoodManager.Pages.Customer.Cart
 {
-    public class IndexModel : PageModel
-    {
+	[Authorize]
+	public class IndexModel : PageModel
+	{
 		public IEnumerable<ShoppingCart> ShoppingCartList { get; set; }
 		public double CartTotal { get; set; }
 		private readonly IUnitOfWork _unitOfWork;
@@ -65,7 +67,7 @@ namespace FoodManager.Pages.Customer.Cart
 
 			_unitOfWork.ShoppingCart.Remove(cart);
 			_unitOfWork.Save();
-			//HttpContext.Session.SetInt32(SD.SessionCart, count);
+			HttpContext.Session.SetInt32(SD.SessionCart, count);
 			return RedirectToPage("/Customer/Cart/Index");
 		}
 

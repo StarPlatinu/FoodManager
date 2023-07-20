@@ -1,23 +1,26 @@
 using FoodManager.Model;
 using FoodManager.Repository.IRepository;
 using FoodManager.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
 namespace FoodManager.Pages.Customer.Home
 {
+    [Authorize]
     public class DetailsModel : PageModel
     {
-		private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        public DetailsModel(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         [BindProperty]
         public ShoppingCart ShoppingCart { get; set; }
-        public DetailsModel(IUnitOfWork unitOfWork)
-		{
-			_unitOfWork = unitOfWork;
-		}
 
-		public void OnGet(int id)
+        public void OnGet(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -44,14 +47,13 @@ namespace FoodManager.Pages.Customer.Home
 
                     _unitOfWork.ShoppingCart.Add(ShoppingCart);
                     _unitOfWork.Save();
-                    //HttpContext.Session.SetInt32(SD.SessionCart,
-                     //   _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == ShoppingCart.ApplicationUserId).ToList().Count);
+                    HttpContext.Session.SetInt32(SD.SessionCart,
+                        _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == ShoppingCart.ApplicationUserId).ToList().Count);
                 }
                 else
                 {
                     _unitOfWork.ShoppingCart.IncrementCount(shoppingCartFromDb, ShoppingCart.Count);
                 }
-                TempData["success"] = "Add to cart successfully";
                 return RedirectToPage("Index");
             }
             return Page();

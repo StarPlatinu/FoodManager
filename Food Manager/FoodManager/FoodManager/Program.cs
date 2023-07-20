@@ -21,6 +21,12 @@ builder.Services.AddSingleton<IEmailSender, EmailSender>();
 //Dk repository cho container
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddSession(options =>
+{
+	options.IdleTimeout = TimeSpan.FromMinutes(100);
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
+});
 //Config urls to lower case
 builder.Services.Configure<RouteOptions>(routeOptions => {
     routeOptions.LowercaseUrls = true;
@@ -41,10 +47,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+string key = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 app.UseAuthentication();;
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapRazorPages();
 app.MapControllers();
 app.Run();

@@ -6,6 +6,10 @@
         IFoodTypeRepository FoodType { get; }
         IMenuItemRepository MenuItem { get; }
         public IShoppingCartRepository ShoppingCart { get;}
-        void Save();
+		IOrderHeaderRepository OrderHeader { get; }
+		IOrderDetailRepository OrderDetail { get; }
+
+		IApplicationUserRepository ApplicationUser { get; }
+		void Save();
     }
 }
