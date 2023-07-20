@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using FoodManager.Utils;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<FoodManagerDBContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DBConnection")
     ));
-
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 builder.Services.AddIdentity<IdentityUser,IdentityRole>()
     .AddEntityFrameworkStores<FoodManagerDBContext>().AddDefaultTokenProviders();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
@@ -49,6 +50,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 string key = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+StripeConfiguration.ApiKey = key;
 app.UseAuthentication();;
 
 app.UseAuthorization();
