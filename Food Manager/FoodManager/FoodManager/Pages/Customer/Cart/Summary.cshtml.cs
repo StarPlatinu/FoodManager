@@ -83,7 +83,7 @@ namespace FoodManager.Pages.Customer.Cart
 				_unitOfWork.Save();
 
 
-				var domain = "https://localhost:44322/";
+				var domain = "https://localhost:7214/";
 				var options = new SessionCreateOptions
 				{
 					LineItems = new List<SessionLineItemOptions>()
@@ -104,7 +104,7 @@ namespace FoodManager.Pages.Customer.Cart
 					{
 						PriceData = new SessionLineItemPriceDataOptions
 						{
-							//7.99->799
+							
 							UnitAmount = (long)(item.MenuItem.Price * 100),
 							Currency = "usd",
 							ProductData = new SessionLineItemPriceDataProductDataOptions
