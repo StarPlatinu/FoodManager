@@ -4,6 +4,7 @@ using FoodManager.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodManager.Migrations
 {
     [DbContext(typeof(FoodManagerDBContext))]
-    partial class FoodManagerDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230719143918_DBContext")]
+    partial class DBContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,88 +98,6 @@ namespace FoodManager.Migrations
                     b.HasIndex("FoodTypeId");
 
                     b.ToTable("MenuItem");
-                });
-
-            modelBuilder.Entity("FoodManager.Model.OrderDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MenuItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MenuItemId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("FoodManager.Model.OrderHeader", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("OrderTotal")
-                        .HasColumnType("float");
-
-                    b.Property<string>("PaymentIntentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PickUpTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PickupName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SessionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("OrderHeader");
                 });
 
             modelBuilder.Entity("FoodManager.Model.ShoppingCart", b =>
@@ -444,36 +365,6 @@ namespace FoodManager.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("FoodType");
-                });
-
-            modelBuilder.Entity("FoodManager.Model.OrderDetails", b =>
-                {
-                    b.HasOne("FoodManager.Model.MenuItem", "MenuItem")
-                        .WithMany()
-                        .HasForeignKey("MenuItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FoodManager.Model.OrderHeader", "OrderHeader")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MenuItem");
-
-                    b.Navigation("OrderHeader");
-                });
-
-            modelBuilder.Entity("FoodManager.Model.OrderHeader", b =>
-                {
-                    b.HasOne("FoodManager.Model.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("FoodManager.Model.ShoppingCart", b =>

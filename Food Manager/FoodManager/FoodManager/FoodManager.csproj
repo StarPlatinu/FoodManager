@@ -22,11 +22,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14" />
+    <PackageReference Include="Stripe.net" Version="41.24.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Pages\Admin\Order\" />
-    <Folder Include="Pages\Customer\Cart\" />
     <Folder Include="wwwroot\images\menuitems\" />
   </ItemGroup>
 
