@@ -3,10 +3,12 @@
 @{
 }
 <div class="row container pb-3 backgroundWhite">
+
 	@foreach (var category in Model.CategoryList)
 	{
-		<h2 class="text-success pl-1"><b>@category.Name</b></h2>
+		<h2 class="text-warning pl-1 p-3 bg-secondary bg-opacity-10 border border-success border-start-0 rounded-start rounded-end"><b>@category.Name</b></h2>
 		<div class="col-12">
+			
 			<div class="row my-3">
 				@foreach (var menuItem in Model.MenuItemList.Where(u => u.CategoryId == category.Id))
 				{
